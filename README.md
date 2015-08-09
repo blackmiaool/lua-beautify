@@ -1,2 +1,2 @@
 # lua-beautify
-A beautifier of Lua written with js.
+A beautifier of Lua written in js.
