@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>lua-beautify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="blackmiaool">
+    <script src="js/beautifier.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <textarea name="" id="text" cols="90" rows="20" style="display:block;"></textarea>
+    <button id="beautify">Beautify</button>
+    <button id="save">Save</button>
+</body>
+<script>
+    $("#text").val(localStorage.getItem("text"));
+    $("#beautify").click(function(){
+        $("#text").val(beautify($("#text").val()))
+    })
+    $("#save").click(function(){
+        localStorage.setItem("text",$("#text").val());        
+    })
+</script>
+</html>
