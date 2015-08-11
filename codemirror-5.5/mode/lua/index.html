@@ -1,20 +1,15 @@
 <!doctype html>
 
 <title>CodeMirror: Lua mode</title>
-<meta charset="utf-8" />
-<link rel=stylesheet href="codemirror-5.5/doc/docs.css">
+<meta charset="utf-8"/>
+<link rel=stylesheet href="../../doc/docs.css">
 
-<link rel="stylesheet" href="codemirror-5.5/lib/codemirror.css">
-<link rel="stylesheet" href="codemirror-5.5/theme/neat.css">
-<!--<script src="codemirror-5.5/addon/edit/matchbrackets.js"></script>-->
-<script src="codemirror-5.5/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../../lib/codemirror.css">
+<link rel="stylesheet" href="../../theme/neat.css">
+<script src="../../addon/edit/matchbrackets.js"></script>
+<script src="../../lib/codemirror.js"></script>
 <script src="lua.js"></script>
-<style>
-    .CodeMirror {
-        border: 1px solid black;
-    }
-</style>
-
+<style>.CodeMirror {border: 1px solid black;}</style>
 <div id=nav>
   <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
 
@@ -78,5 +73,13 @@ end
         theme: "neat"
       });
     </script>
+
+    <p>Loosely based on Franciszek
+    Wawrzak's <a href="http://codemirror.net/1/contrib/lua">CodeMirror
+    1 mode</a>. One configuration parameter is
+    supported, <code>specials</code>, to which you can provide an
+    array of strings to have those identifiers highlighted with
+    the <code>lua-special</code> style.</p>
+    <p><strong>MIME types defined:</strong> <code>text/x-lua</code>.</p>
 
   </article>

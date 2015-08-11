@@ -1,0 +1,136 @@
+<html>
+
+<head>
+
+    <title>Lua5.1.js packer example</title>
+
+    <script src="lua5.1.5.min.js"></script>
+    <script src="example.lua5.1.js"></script>
+
+    <link rel=stylesheet href="codemirror/docs.css">
+    <link rel="stylesheet" href="codemirror/codemirror.css">
+    <link rel="stylesheet" href="codemirror/neat.css">
+    <script src="codemirror-5.5/lib/codemirror.js"></script>
+    <!--    <script src="codemirror/matchbrackets.js"></script>-->
+
+
+    <script src="codemirror/lua.js"></script>
+    <style>
+        .CodeMirror {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <article>
+        <h2>Lua mode</h2>
+        <form>
+            <textarea id="code" name="code">
+                --[[ example useless code to show lua syntax highlighting this is multiline comment ]] function blahblahblah(x) local table = { "asd" = 123, "x" = 0.34, } if x ~= 3 then print( x ) elseif x == "string" my_custom_function( 0x34 ) else unknown_function( "some string" ) end --single line comment end function blablabla3() for k,v in ipairs( table ) do --abcde.. y=[=[ x=[[ x is a multi line string ]] but its definition is iside a highest level string! ]=] print(" \"\" ") s = math.sin( x ) end end
+            </textarea>
+        </form>
+        <script>
+            var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+                matchBrackets: true,
+                theme: "neat"
+            });
+        </script>
+
+        <p>Loosely based on Franciszek Wawrzak's <a href="http://codemirror.net/1/contrib/lua">CodeMirror
+    1 mode</a>. One configuration parameter is supported, <code>specials</code>, to which you can provide an array of strings to have those identifiers highlighted with the <code>lua-special</code> style.</p>
+        <p><strong>MIME types defined:</strong> <code>text/x-lua</code>.</p>
+
+    </article>
+    <script type="text/javascript">
+       
+        var C = Lua5_1.C;
+
+        var L = C.lua_open();
+        C.luaL_openlibs(L);
+
+        C.lua_pushcfunction(
+            L,
+            Lua5_1.Runtime.addFunction(
+                function (L) {
+                    var str = C.luaL_checkstring(L, 1);
+                    alert("{Lua} " + str);
+                    return 0;
+                }
+            )
+        );
+        C.lua_setglobal(L, "ALERT");
+        //console.log()
+        C.luaL_dofile(L, 'main.lua');
+        if (C.luaL_dostring(L, 'print(M.indentcode([[local wwwem;]], [[\n]], true, "    "))') !== 0) {
+            var err = C.lua_tostring(L, -1);
+            C.lua_close(L);
+            L = 0;
+            throw new Error("Lua error: " + err);
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+<!--
+
+
+
+<!doctype html>
+
+<title>CodeMirror: Lua mode</title>
+<meta charset="utf-8" />
+<link rel=stylesheet href="../../doc/docs.css">
+
+<link rel="stylesheet" href="../../lib/codemirror.css">
+<link rel="stylesheet" href="../../theme/neat.css">
+<script src="../../addon/edit/matchbrackets.js"></script>
+<script src="../../lib/codemirror.js"></script>
+<script src="lua.js"></script>
+<style>
+    .CodeMirror {
+        border: 1px solid black;
+    }
+</style>
+<div id=nav>
+    <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
+
+    <ul>
+        <li><a href="../../index.html">Home</a>
+            <li><a href="../../doc/manual.html">Manual</a>
+                <li><a href="https://github.com/codemirror/codemirror">Code</a>
+    </ul>
+    <ul>
+        <li><a href="../index.html">Language modes</a>
+            <li><a class=active href="#">Lua</a>
+    </ul>
+</div>
+
+<article>
+    <h2>Lua mode</h2>
+    <form>
+        <textarea id="code" name="code">
+            --[[ example useless code to show lua syntax highlighting this is multiline comment ]] function blahblahblah(x) local table = { "asd" = 123, "x" = 0.34, } if x ~= 3 then print( x ) elseif x == "string" my_custom_function( 0x34 ) else unknown_function( "some string" ) end --single line comment end function blablabla3() for k,v in ipairs( table ) do --abcde.. y=[=[ x=[[ x is a multi line string ]] but its definition is iside a highest level string! ]=] print(" \"\" ") s = math.sin( x ) end end
+        </textarea>
+    </form>
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            matchBrackets: true,
+            theme: "neat"
+        });
+    </script>
+
+    <p>Loosely based on Franciszek Wawrzak's <a href="http://codemirror.net/1/contrib/lua">CodeMirror
+    1 mode</a>. One configuration parameter is supported, <code>specials</code>, to which you can provide an array of strings to have those identifiers highlighted with the <code>lua-special</code> style.</p>
+    <p><strong>MIME types defined:</strong> <code>text/x-lua</code>.</p>
+
+</article>-->
