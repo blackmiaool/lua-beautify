@@ -29,7 +29,42 @@
         <h2>Lua mode</h2>
         <form>
             <textarea id="code" name="code">
-                --[[ example useless code to show lua syntax highlighting this is multiline comment ]] function blahblahblah(x) local table = { "asd" = 123, "x" = 0.34, } if x ~= 3 then print( x ) elseif x == "string" my_custom_function( 0x34 ) else unknown_function( "some string" ) end --single line comment end function blablabla3() for k,v in ipairs( table ) do --abcde.. y=[=[ x=[[ x is a multi line string ]] but its definition is iside a highest level string! ]=] print(" \"\" ") s = math.sin( x ) end end
+                --[[
+example useless code to show lua syntax highlighting
+this is multiline comment
+]]
+
+function blahblahblah(x)
+
+  --local table = {"asd" = 123, "x" = 0.34,  }
+  if x ~= 3 then
+    print( x )
+  elseif x == "string" then
+    my_custom_function( 0x34 )
+  else
+    unknown_function( "some string" )
+  end
+
+  --single line comment
+  
+end
+
+function blablabla3()
+
+  for k,v in ipairs( table ) do
+    --abcde..
+    y=[=[
+  x=[[
+      x is a multi line string
+   ]]
+  but its definition is iside a highest level string!
+  ]=]
+    print(" \"\" ")
+
+    s = math.sin( x )
+  end
+
+end
             </textarea>
         </form>
         <script>
@@ -64,7 +99,12 @@
         C.lua_setglobal(L, "ALERT");
         //console.log()
         C.luaL_dofile(L, 'main.lua');
-        if (C.luaL_dostring(L, 'print(M.indentcode([[local wwwem;]], [[\n]], true, "    "))') !== 0) {
+        var value=editor.getValue();
+        C.lua_pushstring(L,value);
+        C.lua_setglobal(L, "toS");
+        console.log(value)
+        
+        if (C.luaL_dostring(L, 'print(M.indentcode(toS, [[\n]], true, "    "))') !== 0) {
             var err = C.lua_tostring(L, -1);
             C.lua_close(L);
             L = 0;
