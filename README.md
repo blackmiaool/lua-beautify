@@ -1,2 +1,3 @@
 # lua-beautify
-A beautifier of Lua written in js.
+Lua beautifier powered by WebAssembly.  
+Works only in the browser.
